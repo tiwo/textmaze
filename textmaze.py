@@ -82,7 +82,7 @@ _DIRS = { #    dy, dx, opposite
          _RI: (0, +1, _LE)}
 _CHARS = u" ╵╴╯╷│╮┤╶╰─┴╭├┬┼"
 
-def gen_maze(m, n):
+def gen_maze(m, n, walls=True):
     """generate a maze of size n×m"""
     maze = []
     for i in range(m):
@@ -115,6 +115,24 @@ def gen_maze(m, n):
             assert maze[i][j] < (2<<4)
             assert maze[I][J] < (2<<4)
             equiv.modulo((i, j), (I, J))
+
+
+    if walls:
+        walls = []
+        for i in range(m+1):
+            line = [0] * (n + 1)
+            for j in range(n+1):
+                if j < n and (i == m or not maze[i][j] & _UP):
+                    line[j] += _RI
+                if i < m and (j == n or not maze[i][j] & _LE):
+                    line[j] += _DN
+                if j > 0 and (i == 0 or not maze[i-1][j-1] & _DN):
+                    line[j] += _LE
+                if i > 0 and (j == 0 or not maze[i-1][j-1] & _RI):
+                    line[j] += _UP
+            walls.append(line)
+    
+        maze = walls
 
     maze = "\n".join("".join(_CHARS[c] for c in L) for L in maze)
 
