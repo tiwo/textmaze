@@ -140,7 +140,24 @@ def gen_maze(m, n, walls=True):
 
             
 if __name__ == "__main__":
-    m, n = 20, 70
+    from sys import argv, stderr, exit
+    if len(argv) == 3:
+        try:
+            m, n = int(argv[1]), int(argv[2])
+        except ValueError:
+            print >>stderr, "please give two integers"
+            exit(1)
+        if m < 2 or n < 2:
+            print >>stderr, "Need at least size 2x2, %ix%i given" % (m, n)
+            exit(1)
+
+
+    elif len(argv) == 0:
+        m, n = 15, 18
+    else:
+        print >>stderr, "Need exactly 0 or 2 arguments"
+        exit(1)
+        
     maze = gen_maze(m, n)
     print maze
 
