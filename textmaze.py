@@ -87,7 +87,7 @@ def gen_maze(m, n):
     maze = []
     for i in range(m):
         maze.append(n * [0])
-    walls = []
+    paths = []
     
     equiv = Equivalence()
     for i in range(m):
@@ -95,12 +95,12 @@ def gen_maze(m, n):
             assert maze[i][j] == 0
             equiv.isolate((i, j))
             if i > 0:
-                walls.append((i, j, _UP))
+                paths.append((i, j, _UP))
             if j > 0:
-                walls.append((i, j, _LE))
-    random.shuffle(walls)
+                paths.append((i, j, _LE))
+    random.shuffle(paths)
 
-    for i, j, direction in walls:
+    for i, j, direction in paths:
         _ = _DIRS[direction]
         I = i + _[0]
         J = j + _[1]
