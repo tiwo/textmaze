@@ -100,7 +100,6 @@ def gen_maze(n, m):
                 walls.append((i, j, _LE))
     random.shuffle(walls)
 
-    cnt = 0
     for i, j, direction in walls:
         _ = _DIRS[direction]
         I = i + _[0]
@@ -124,7 +123,5 @@ if __name__ == "__main__":
     m, n = 20, 20
     maze = gen_maze(m,n)
     for i in range(m):
-        for j in range(n):
-            print _CHARS[maze[i][j]],
-        print ""
+        print "".join(_CHARS[c] for c in maze[i])
 
