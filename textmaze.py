@@ -84,13 +84,15 @@ _CHARS = u" ╵╴┘╷│┐┤╶└─┴┌├┬┼"
 
 def gen_maze(n, m):
     """generate a maze of size n×m"""
-    maze = {}
+    maze = []
+    for i in range(m):
+        maze.append(n * [0])
     walls = []
     
     equiv = Equivalence()
     for i in range(m):
         for j in range(n):
-            maze[(i,j)] = 0
+            assert maze[i][j] == 0
             equiv.isolate((i, j))
             if i > 0:
                 walls.append((i, j, _UP))
@@ -111,8 +113,10 @@ def gen_maze(n, m):
         assert 0 <= I <= n
         assert 0 <= J <= m
         if not equiv.equiv((i, j), (I, J)):
-            maze[(i,j)] |= direction
-            maze[(I,J)] |= Direction
+            maze[i][j] += direction
+            maze[I][J] += Direction
+            assert maze[i][j] < (2<<4)
+            assert maze[I][J] < (2<<4)
             equiv.modulo((i, j), (I, J))
 
     return maze
@@ -123,6 +127,6 @@ if __name__ == "__main__":
     maze = gen_maze(m,n)
     for i in range(m):
         for j in range(n):
-            print _CHARS[maze[(i, j)]],
+            print _CHARS[maze[i][j]],
         print ""
 
