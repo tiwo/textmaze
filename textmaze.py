@@ -116,12 +116,13 @@ def gen_maze(m, n):
             assert maze[I][J] < (2<<4)
             equiv.modulo((i, j), (I, J))
 
+    maze = "\n".join("".join(_CHARS[c] for c in L) for L in maze)
+
     return maze
 
             
 if __name__ == "__main__":
     m, n = 20, 70
     maze = gen_maze(m, n)
-    for i in range(m):
-        print "".join(_CHARS[c] for c in maze[i])
+    print maze
 
