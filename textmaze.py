@@ -120,7 +120,7 @@ def gen_maze(m, n):
 
             
 if __name__ == "__main__":
-    m, n = 20, 20
+    m, n = 20, 70
     maze = gen_maze(m, n)
     for i in range(m):
         print "".join(_CHARS[c] for c in maze[i])
