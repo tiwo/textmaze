@@ -150,9 +150,7 @@ if __name__ == "__main__":
         if m < 2 or n < 2:
             print >>stderr, "Need at least size 2x2, %ix%i given" % (m, n)
             exit(1)
-
-
-    elif len(argv) == 0:
+    elif len(argv) == 1:
         m, n = 15, 18
     else:
         print >>stderr, "Need exactly 0 or 2 arguments"
