@@ -75,7 +75,7 @@ _UP = 1 << 0
 _LE = 1 << 1
 _DN = 1 << 2
 _RI = 1 << 3
-_DIRS = {
+_DIRS = { #    dy, dx, opposite
          _UP: (-1, 0, _DN),
          _LE: (0, -1, _RI),
          _DN: (+1, 0, _UP),
