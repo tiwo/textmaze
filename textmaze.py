@@ -80,7 +80,7 @@ _DIRS = {
          _LE: (0, -1, _RI),
          _DN: (+1, 0, _UP),
          _RI: (0, +1, _LE)}
-_CHARS = u" ╵╴┘╷│┐┤╶└─┴┌├┬┼"
+_CHARS = u" ╵╴╯╷│╮┤╶╰─┴╭├┬┼"
 
 def gen_maze(m, n):
     """generate a maze of size n×m"""
