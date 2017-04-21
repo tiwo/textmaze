@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, see <http://www.gnu.org/licenses/>.
 
+
+from __future__ import print_function
 import random
 
 class Equivalence(object):
@@ -36,7 +38,7 @@ class Equivalence(object):
         2
         >>> e.equiv(2,4)
         True
-        
+
     """
     def __init__(self, iterable=()):
         self._d = {}
@@ -50,14 +52,14 @@ class Equivalence(object):
 
     def __getitem__(self, key):
         return self._d[key]
-    
+
     def __len__(self):
         return self._n
 
     def modulo(self, one, another):
         rep1 = self[one]
         rep2 = self[another]
-        found = 0 
+        found = 0
         for i in self._d.keys():
             if self._d[i] == rep2:
                 self._d[i] = rep1
@@ -66,7 +68,7 @@ class Equivalence(object):
 
     def equiv(self, one, another):
         return self._d[one] == self._d[another]
-            
+
 
 import doctest
 doctest.testmod()
@@ -88,7 +90,7 @@ def gen_maze(m, n, walls=True):
     for i in range(m):
         maze.append(n * [0])
     paths = []
-    
+
     equiv = Equivalence()
     for i in range(m):
         for j in range(n):
@@ -131,31 +133,31 @@ def gen_maze(m, n, walls=True):
                 if i > 0 and (j == 0 or not maze[i-1][j-1] & _RI):
                     line[j] += _UP
             walls.append(line)
-    
+
         maze = walls
 
     maze = "\n".join("".join(_CHARS[c] for c in L) for L in maze)
 
     return maze
 
-            
+def _die(exitcode, message):
+    from sys import stderr, exit
+    print(message, file=stderr)
+    exit(exitcode)
+
 if __name__ == "__main__":
     from sys import argv, stderr, exit
     if len(argv) == 3:
         try:
             m, n = int(argv[1]), int(argv[2])
         except ValueError:
-            print >>stderr, "please give two integers"
-            exit(1)
+            _die(1, "please give two integers")
         if m < 2 or n < 2:
-            print >>stderr, "Need at least size 2x2, %ix%i given" % (m, n)
-            exit(1)
+            _die(1, "Need at least size 2x2, %ix%i given" % (m, n))
     elif len(argv) == 1:
         m, n = 15, 18
     else:
-        print >>stderr, "Need exactly 0 or 2 arguments"
-        exit(1)
-        
-    maze = gen_maze(m, n)
-    print maze
+        _die(1, "Need exactly 0 or 2 arguments")
 
+    maze = gen_maze(m, n)
+    print(maze)
