@@ -22,25 +22,25 @@ How to run:
 ===========
 
 This program should run on both recent versions of Python 2 and on
-Python 3.
+Python 3. Start with::
 
     ./textmaze.py
 
-or
+or::
 
     python textmaze.py
 
-Optionally, you can adjust the size of the maze:
+Optionally, you can adjust the size of the maze::
 
     python textmaze.py 12 20
 
 This script needs to output Unicode. If your Python is too afraid
 ("UnicodeEncodeError") then probably your terminal doesn't support
-Unicode, or doesn't advertise this capability. How does the output of
+Unicode, or doesn't advertise this capability. How does the output of::
 
     cat README
 
-look? Good? Then
+look? Good? Then this::
 
     PYTHONIOENCODING=UTF-8 python textmaze.py
 
